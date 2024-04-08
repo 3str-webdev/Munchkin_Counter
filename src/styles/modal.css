@@ -6,11 +6,9 @@
   width: 100dvw;
   height: 100dvh;
   background-color: rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease-in;
+  transition: all 150ms ease-in;
 
   padding: 25px;
-
-  /* animation: init 0.15s ease-in 1; */
 }
 
 .modal-enter {
@@ -78,15 +76,4 @@
 
 .modal__footer {
   margin: auto 0;
-}
-
-@keyframes init {
-  0% {
-    top: -10px;
-    opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
 }

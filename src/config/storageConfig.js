@@ -4,4 +4,5 @@ export const storageConfig = {
   genderAlias: "isMale",
   iconsAlias: "icons",
   sideAlias: "side",
+  birthdayAlias: "birthday"
 };
