@@ -9,7 +9,7 @@ const initialCache = localStorage[birthdayAlias];
 
 const getInitialCheckedStatus = () => {
   const isApril = dayjs().month() === 3;
-  const is9th = dayjs().date() === 8; // FIXME: Изменить на 9-е
+  const is9th = dayjs().date() === 9;
   const isBirthday = isApril && is9th;
 
   if (!isBirthday) return true;
