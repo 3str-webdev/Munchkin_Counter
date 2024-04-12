@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 
 export default defineConfig(() => {
 	return {
+		base: "/Munchkin_Counter/",
 		build: {
 			outDir: "build",
 		},
