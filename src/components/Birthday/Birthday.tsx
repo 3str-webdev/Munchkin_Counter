@@ -1,4 +1,4 @@
-import { useBirthdayStore } from "../../store/birthdayStore";
+import { useBirthdayStore } from "@/store/birthdayStore";
 import { motion } from "framer-motion";
 
 export const Birthday = () => {

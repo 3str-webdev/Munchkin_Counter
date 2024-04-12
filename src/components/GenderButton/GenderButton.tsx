@@ -1,8 +1,7 @@
-import React from "react";
-import { useGenderStore } from "../../store/genderStore";
-import { useIconsStore } from "../../store/iconsStore";
+import { useGenderStore } from "@/store/genderStore";
+import { useIconsStore } from "@/store/iconsStore";
 
-const GenderButton = () => {
+export const GenderButton = () => {
 	const { isMale, changeGender } = useGenderStore((store) => store);
 	const icons = useIconsStore((store) => store.icons);
 
@@ -18,5 +17,3 @@ const GenderButton = () => {
 		</>
 	);
 };
-
-export default GenderButton;

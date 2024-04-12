@@ -45,12 +45,14 @@
   "devDependencies": {
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-react": "^7.22.15",
+    "@types/react-transition-group": "^4.4.10",
     "@vitejs/plugin-react": "^4.2.1",
     "babel-jest": "^29.7.0",
     "gh-pages": "^4.0.0",
     "jest": "^27.5.1",
     "prettier": "^3.2.5",
     "react-test-renderer": "^18.2.0",
+    "typescript": "^5.4.5",
     "vite": "^5.2.8"
   }
 }
