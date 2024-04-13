@@ -8,7 +8,7 @@ type RandomValue = {
 	value: number | null;
 };
 
-const duration = 2000; // 2 sec
+const duration = 3000; // 2 sec
 
 export const Random = () => {
 	const [randomValue, setRandomValue] = useState<RandomValue>({ value: null });
@@ -33,7 +33,6 @@ export const Random = () => {
 						<ProgressBar
 							key={Date.now()}
 							duration={duration}
-							delay={10}
 							onFinish={resetRandomValue}
 						/>
 					</div>

@@ -1,25 +1,20 @@
-import { useProgress } from "@/hooks/useProgress";
 import { useEffect } from "react";
+import { useProgress } from "./model/useProgress";
 
 type ProgressBarProps = {
 	duration: number;
-	delay: number;
 	onFinish: () => void;
 };
 
-export const ProgressBar = ({
-	duration,
-	delay,
-	onFinish,
-}: ProgressBarProps) => {
-	const width = useProgress(duration, delay);
-	const widthPercentage = `${width}%`;
+export const ProgressBar = ({ duration, onFinish }: ProgressBarProps) => {
+	const progress = useProgress(duration, 1);
+	const widthPercentage = `${100 - progress}%`;
 
 	useEffect(() => {
-		if (width <= 0) {
+		if (progress >= 100) {
 			onFinish();
 		}
-	}, [onFinish, width]);
+	}, [onFinish, progress]);
 
 	return <div className="progress" style={{ width: widthPercentage }} />;
 };
