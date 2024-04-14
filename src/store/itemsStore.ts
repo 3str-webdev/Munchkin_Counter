@@ -1,6 +1,6 @@
 import { storageConfig } from "@/config/storageConfig";
 import { create } from "zustand";
-import { saveInStorage } from "./middleware/storageMiddleware";
+import { persist } from "zustand/middleware";
 
 type ItemsStore = {
 	items: number;
@@ -13,8 +13,8 @@ const itemsAlias = storageConfig.itemsAlias;
 
 const initialCache = localStorage[itemsAlias];
 
-export const useItemsStore = create<ItemsStore>(
-	saveInStorage(
+export const useItemsStore = create<ItemsStore>()(
+	persist(
 		(set) => ({
 			items: initialCache !== undefined ? JSON.parse(initialCache) : 0,
 			incrementItems: () => set((state) => ({ items: state.items + 1 })),
@@ -22,7 +22,7 @@ export const useItemsStore = create<ItemsStore>(
 			resetItems: () => set(() => ({ items: 0 })),
 		}),
 		{
-			alias: itemsAlias,
+			name: itemsAlias,
 		},
 	),
 );

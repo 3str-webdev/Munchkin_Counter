@@ -1,6 +1,6 @@
 import { storageConfig } from "@/config/storageConfig";
 import { create } from "zustand";
-import { saveInStorage } from "./middleware/storageMiddleware";
+import { persist } from "zustand/middleware";
 
 type LevelStore = {
 	level: number;
@@ -13,8 +13,8 @@ const levelAlias = storageConfig.levelAlias;
 
 const initialCache = localStorage[levelAlias];
 
-export const useLevelStore = create<LevelStore>(
-	saveInStorage(
+export const useLevelStore = create<LevelStore>()(
+	persist(
 		(set) => ({
 			level: initialCache !== undefined ? JSON.parse(initialCache) : 1,
 			incrementLevel: () => set((state) => ({ level: state.level + 1 })),
@@ -23,7 +23,7 @@ export const useLevelStore = create<LevelStore>(
 			resetLevel: () => set(() => ({ level: 1 })),
 		}),
 		{
-			alias: levelAlias,
+			name: levelAlias,
 		},
 	),
 );

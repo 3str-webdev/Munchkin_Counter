@@ -1,6 +1,6 @@
 import { storageConfig } from "@/config/storageConfig";
 import { create } from "zustand";
-import { saveInStorage } from "./middleware/storageMiddleware";
+import { persist } from "zustand/middleware";
 
 type IconsSet = {
 	type: 1 | 2;
@@ -17,15 +17,9 @@ const iconsAlias = storageConfig.iconsAlias;
 
 const initialCache = localStorage[iconsAlias];
 
-export const useIconsStore = create<IconsStore>(
-	saveInStorage(
-		(
-			set: (
-				arg0: (store: IconsStore) => {
-					icons: IconsSet;
-				},
-			) => void,
-		) => ({
+export const useIconsStore = create<IconsStore>()(
+	persist(
+		(set) => ({
 			icons:
 				initialCache !== undefined
 					? JSON.parse(initialCache)
@@ -48,7 +42,7 @@ export const useIconsStore = create<IconsStore>(
 				}),
 		}),
 		{
-			alias: iconsAlias,
+			name: iconsAlias,
 		},
 	),
 );

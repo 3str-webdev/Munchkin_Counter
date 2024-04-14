@@ -1,6 +1,6 @@
 import { storageConfig } from "@/config/storageConfig";
 import { create } from "zustand";
-import { saveInStorage } from "./middleware/storageMiddleware";
+import { persist } from "zustand/middleware";
 
 type GenderStore = {
 	isMale: boolean;
@@ -11,15 +11,15 @@ const genderAlias = storageConfig.genderAlias;
 
 const initialCache = localStorage[genderAlias];
 
-export const useGenderStore = create<GenderStore>(
-	saveInStorage(
-		(set: (arg0: (store: GenderStore) => { isMale: boolean }) => void) => ({
+export const useGenderStore = create<GenderStore>()(
+	persist(
+		(set) => ({
 			isMale: initialCache !== undefined ? JSON.parse(initialCache) : true,
 			changeGender: () =>
 				set((store: GenderStore) => ({ isMale: !store.isMale })),
 		}),
 		{
-			alias: genderAlias,
+			name: genderAlias,
 		},
 	),
 );

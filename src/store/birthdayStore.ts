@@ -1,7 +1,7 @@
 import { storageConfig } from "@/config/storageConfig";
 import dayjs from "dayjs";
 import { create } from "zustand";
-import { saveInStorage } from "./middleware/storageMiddleware";
+import { persist } from "zustand/middleware";
 
 type BirthdayStore = {
 	birthday: boolean;
@@ -22,9 +22,9 @@ const getInitialCheckedStatus = () => {
 	return false;
 };
 
-export const useBirthdayStore = create<BirthdayStore>(
-	saveInStorage(
-		(set: (birthday: { birthday: boolean }) => unknown) => ({
+export const useBirthdayStore = create<BirthdayStore>()(
+	persist(
+		(set) => ({
 			birthday:
 				initialCache !== undefined
 					? JSON.parse(initialCache)
@@ -32,7 +32,7 @@ export const useBirthdayStore = create<BirthdayStore>(
 			check: () => set({ birthday: true }),
 		}),
 		{
-			alias: birthdayAlias,
+			name: birthdayAlias,
 		},
 	),
 );
