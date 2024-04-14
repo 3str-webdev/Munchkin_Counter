@@ -9,12 +9,10 @@ type GenderStore = {
 
 const genderAlias = storageConfig.genderAlias;
 
-const initialCache = localStorage[genderAlias];
-
 export const useGenderStore = create<GenderStore>()(
 	persist(
 		(set) => ({
-			isMale: initialCache !== undefined ? JSON.parse(initialCache) : true,
+			isMale: true,
 			changeGender: () =>
 				set((store: GenderStore) => ({ isMale: !store.isMale })),
 		}),

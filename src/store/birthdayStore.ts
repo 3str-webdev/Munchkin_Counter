@@ -10,8 +10,6 @@ type BirthdayStore = {
 
 const birthdayAlias: storageConfig = storageConfig.birthdayAlias;
 
-const initialCache = localStorage[birthdayAlias];
-
 const getInitialCheckedStatus = () => {
 	const isApril = dayjs().month() === 3;
 	const is9th = dayjs().date() === 9;
@@ -25,10 +23,7 @@ const getInitialCheckedStatus = () => {
 export const useBirthdayStore = create<BirthdayStore>()(
 	persist(
 		(set) => ({
-			birthday:
-				initialCache !== undefined
-					? JSON.parse(initialCache)
-					: getInitialCheckedStatus(),
+			birthday: getInitialCheckedStatus(),
 			check: () => set({ birthday: true }),
 		}),
 		{

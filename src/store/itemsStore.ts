@@ -11,12 +11,10 @@ type ItemsStore = {
 
 const itemsAlias = storageConfig.itemsAlias;
 
-const initialCache = localStorage[itemsAlias];
-
 export const useItemsStore = create<ItemsStore>()(
 	persist(
 		(set) => ({
-			items: initialCache !== undefined ? JSON.parse(initialCache) : 0,
+			items: 0,
 			incrementItems: () => set((state) => ({ items: state.items + 1 })),
 			decrementItems: () => set((state) => ({ items: state.items - 1 })),
 			resetItems: () => set(() => ({ items: 0 })),

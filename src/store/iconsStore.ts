@@ -15,15 +15,10 @@ type IconsStore = {
 
 const iconsAlias = storageConfig.iconsAlias;
 
-const initialCache = localStorage[iconsAlias];
-
 export const useIconsStore = create<IconsStore>()(
 	persist(
 		(set) => ({
-			icons:
-				initialCache !== undefined
-					? JSON.parse(initialCache)
-					: { type: 1, male: "bx bx-male", female: "bx bx-female" },
+			icons: { type: 1, male: "bx bx-male", female: "bx bx-female" },
 			switchIcons: () =>
 				set((store: { icons: IconsSet }) => {
 					if (store.icons.type === 1) {

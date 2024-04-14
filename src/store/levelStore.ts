@@ -11,12 +11,10 @@ type LevelStore = {
 
 const levelAlias = storageConfig.levelAlias;
 
-const initialCache = localStorage[levelAlias];
-
 export const useLevelStore = create<LevelStore>()(
 	persist(
 		(set) => ({
-			level: initialCache !== undefined ? JSON.parse(initialCache) : 1,
+			level: 1,
 			incrementLevel: () => set((state) => ({ level: state.level + 1 })),
 			decrementLevel: () =>
 				set((state) => ({ level: Math.max(1, state.level - 1) })),

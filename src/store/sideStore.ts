@@ -10,12 +10,10 @@ type SideStore = {
 
 const sideAlias = storageConfig.sideAlias;
 
-const initialCache = localStorage[sideAlias];
-
 export const useSideCountStore = create<SideStore>()(
 	persist(
 		(set) => ({
-			side: initialCache !== undefined ? JSON.parse(initialCache) : 0,
+			side: 0,
 			setCount: (side) => set(() => ({ side })),
 			resetCount: () => set(() => ({ side: 0 })),
 		}),
