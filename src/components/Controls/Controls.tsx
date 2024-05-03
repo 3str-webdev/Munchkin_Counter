@@ -1,31 +1,37 @@
 import { Counter } from "@/components/Counter";
-import { useItemsStore } from "@/store/itemsStore";
-import { useLevelStore } from "@/store/levelStore";
+import { useCounter } from "@/shared/hooks/use-counter";
+import { useCounterId } from "@/shared/hooks/use-counter-id";
+import { useCountersStore } from "@/store/counters-store";
 
 export const Controls = () => {
-	const { level, incrementLevel, decrementLevel, resetLevel } = useLevelStore(
-		(store) => store,
-	);
+	const id = useCounterId();
 
-	const { items, incrementItems, decrementItems, resetItems } = useItemsStore(
-		(store) => store,
-	);
+	const {
+		incrementLevel,
+		decrementLevel,
+		resetLevel,
+		incrementItems,
+		decrementItems,
+		resetItems,
+	} = useCountersStore((store) => store);
+
+	const { level, items } = useCounter();
 
 	return (
 		<div className="counters">
 			<Counter
 				title={"Уровень"}
 				value={level}
-				increment={incrementLevel}
-				decrement={decrementLevel}
-				reset={resetLevel}
+				increment={() => incrementLevel(id)}
+				decrement={() => decrementLevel(id)}
+				reset={() => resetLevel(id)}
 			/>
 			<Counter
 				title={"Шмотки"}
 				value={items}
-				increment={incrementItems}
-				decrement={decrementItems}
-				reset={resetItems}
+				increment={() => incrementItems(id)}
+				decrement={() => decrementItems(id)}
+				reset={() => resetItems(id)}
 			/>
 		</div>
 	);

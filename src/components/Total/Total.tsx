@@ -1,26 +1,22 @@
 import { Gender } from "@/components/Gender";
-import { useItemsStore } from "@/store/itemsStore";
-import { useLevelStore } from "@/store/levelStore";
-import { useSideCountStore } from "@/store/sideStore";
+import { useCounter } from "@/shared/hooks/use-counter";
 
 export const Total = () => {
-	const level = useLevelStore((store) => store.level);
-	const items = useItemsStore((store) => store.items);
-	const side = useSideCountStore((store) => store.side);
+	const { level, items, modification } = useCounter();
 
-	const isShowSide = side !== 0;
-	const sideSymbol = side > 0 ? "+" : "";
+	const isShowModification = modification !== 0;
+	const modificationSymbol = modification > 0 ? "+" : "";
 
 	return (
 		<div className="total">
 			<div className="result">
-				{isShowSide && (
+				{isShowModification && (
 					<div className="side-badge">
-						{sideSymbol}
-						{side}
+						{modificationSymbol}
+						{modification}
 					</div>
 				)}
-				<div className="total__value">{level + items + side}</div>
+				<div className="total__value">{level + items + modification}</div>
 			</div>
 			<Gender />
 		</div>

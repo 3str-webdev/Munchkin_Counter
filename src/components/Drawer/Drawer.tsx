@@ -2,6 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { twJoin } from "tailwind-merge";
 import { MCSwitch } from "../ui";
+import { NavLink } from "react-router-dom";
 
 export const Drawer = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -70,6 +71,10 @@ export const Drawer = () => {
 									>
 										Погоди, я ещё не сделал
 									</p>
+								</li>
+
+								<li>
+									<NavLink to="/">Мои счётчики</NavLink>
 								</li>
 							</ul>
 

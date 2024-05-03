@@ -1,16 +1,18 @@
-import { useGenderStore } from "@/store/genderStore";
-import { useIconsStore } from "@/store/iconsStore";
+import { useCounter } from "@/shared/hooks/use-counter";
+import { useCounterId } from "@/shared/hooks/use-counter-id";
+import { useCountersStore } from "@/store/counters-store";
 
 export const GenderButton = () => {
-	const { isMale, changeGender } = useGenderStore((store) => store);
-	const icons = useIconsStore((store) => store.icons);
+	const { isMale, icons } = useCounter();
+	const id = useCounterId();
+	const toggleGender = useCountersStore((store) => store.toggleGender);
 
 	return (
 		<>
 			<button
 				type="button"
 				className={`${isMale ? "male " : "female "}btn`}
-				onClick={changeGender}
+				onClick={() => toggleGender(id)}
 			>
 				<i className={isMale ? icons.male : icons.female} />
 			</button>

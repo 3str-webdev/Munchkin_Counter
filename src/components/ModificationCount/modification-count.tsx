@@ -1,9 +1,16 @@
 import { Input, Modal } from "@/components/ui";
-import { useSideCountStore } from "@/store/sideStore";
+import { useCounter } from "@/shared/hooks/use-counter";
+import { useCounterId } from "@/shared/hooks/use-counter-id";
+import { useCountersStore } from "@/store/counters-store";
 import { type ChangeEvent, useEffect, useRef, useState } from "react";
 
-export const SideCount = () => {
-	const { side, setCount, resetCount } = useSideCountStore();
+export const ModificationCount = () => {
+	const { setModification, resetModification } = useCountersStore(
+		(store) => store,
+	);
+	const id = useCounterId();
+	const { modification } = useCounter();
+
 	const [inputValue, setInputValue] = useState("");
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -31,12 +38,12 @@ export const SideCount = () => {
 	};
 
 	const handleClickSaveCount = () => {
-		setCount(Number(inputValue));
+		setModification(id, Number(inputValue));
 		handleCloseModal();
 	};
 
 	const handleClickResetCount = () => {
-		resetCount();
+		resetModification(id);
 		handleCloseModal();
 	};
 
@@ -57,7 +64,7 @@ export const SideCount = () => {
 				<Modal.Header>Модификаторы</Modal.Header>
 				<Modal.Body className="side-count__modal__body">
 					<Input
-						placeholder={String(side)}
+						placeholder={String(modification)}
 						inputMode="numeric"
 						className="side-count__modal__input"
 						value={inputValue}

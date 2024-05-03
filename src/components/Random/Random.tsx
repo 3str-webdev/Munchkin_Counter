@@ -1,5 +1,5 @@
 import { ProgressBar } from "@/components/ProgressBar";
-import { random } from "@/lib/random";
+import { random } from "@/shared/lib/random";
 import { useState } from "react";
 
 // Такой формат позволяет ререндерить компонент даже если random вернул такое же число
