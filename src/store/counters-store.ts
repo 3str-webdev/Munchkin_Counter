@@ -1,4 +1,9 @@
-import type { CounterType, IconsSet } from "@/shared/types";
+import type {
+	ClassType,
+	CounterType,
+	IconsSet,
+	RaceType,
+} from "@/shared/types";
 import dayjs from "dayjs";
 import { nanoid } from "nanoid";
 import { create } from "zustand";
@@ -29,6 +34,9 @@ type CountersStore = {
 
 	toggleGender: (id: string) => void;
 	toggleIcons: (id: string) => void;
+
+	setRace: (id: string, race: RaceType[]) => void;
+	setClass: (id: string, classType: ClassType[]) => void;
 };
 
 export const useCountersStore = create<CountersStore>()(
@@ -110,6 +118,13 @@ export const useCountersStore = create<CountersStore>()(
 					};
 				});
 			},
+
+			setRace: (id, race) => {
+				get().updateCounterField<RaceType[]>(id, "race", () => race);
+			},
+			setClass: (id, classType) => {
+				get().updateCounterField<ClassType[]>(id, "classes", () => classType);
+			},
 		}),
 		{
 			name: "counters",
@@ -126,5 +141,7 @@ export const getDefaultCounter = (): CounterType => {
 		isMale: true,
 		icons: { type: 1, male: "bx bx-male", female: "bx bx-female" },
 		date: dayjs().format("DD.MM.YYYY"),
+		race: ["Человек"],
+		classes: [],
 	};
 };

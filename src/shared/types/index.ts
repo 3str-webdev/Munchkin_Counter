@@ -1,3 +1,12 @@
+export type RaceType =
+	| "Человек"
+	| "Эльф"
+	| "Дварф"
+	| "Хафлинг"
+	| "Гном"
+	| "Орк";
+export type ClassType = "Воин" | "Волшебник" | "Вор" | "Клирик" | "Бард";
+
 export type CounterType = {
 	id: string;
 	items: number;
@@ -6,6 +15,8 @@ export type CounterType = {
 	isMale: boolean;
 	icons: IconsSet;
 	date: string;
+	race: RaceType[];
+	classes: ClassType[];
 };
 
 export type IconsSet = {
