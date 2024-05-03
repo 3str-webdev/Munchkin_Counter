@@ -32,6 +32,7 @@ export const InfoMenu = ({ value, items, onChange }: InfoMenuProps) => {
 				<Popover.Panel
 					className={twJoin(
 						"absolute z-10 mt-3",
+						"text-lg",
 						"bg-neutral-900 p-2",
 						"border-[1px] border-primary-500",
 					)}
